@@ -1,10 +1,11 @@
 package main;
 
-import main.view.GameWindow;
+import main.controller.GameController;
 
 public class Main {
 
     public static void main(String[] args) {
-	GameWindow window = new GameWindow();
+
+        GameController game = new GameController();
     }
 }

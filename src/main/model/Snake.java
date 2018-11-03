@@ -13,10 +13,12 @@ public class Snake {
     private DirectionEnum nextDirection;
     private Point snakeHead;
     private List<Point> snakeBody;
+    private int snakeBodyLength;
 
     public Snake(){
         initializeStartingPositon();
     }
+
     public void move() {
         moveBody();
         switch(direction){
@@ -35,9 +37,9 @@ public class Snake {
         }
 
     }
+
     private void moveUp(){
         snakeHead.setY(snakeHead.getY()-1);
-
     }
     private void moveDown(){
         snakeHead.setY(snakeHead.getY()+1);
@@ -54,6 +56,7 @@ public class Snake {
         }
         snakeBody.get(0).setFromPoint(snakeHead);
     }
+
     private void initializeStartingPositon(){
         snakeHead = new Point(Board.BOARD_SIZE/2,Board.BOARD_SIZE/2);
         snakeBody = new ArrayList<>();
@@ -61,13 +64,16 @@ public class Snake {
         snakeBody.add(new Point(Board.BOARD_SIZE/2,Board.BOARD_SIZE/2-2));
         snakeBody.add(new Point(Board.BOARD_SIZE/2,Board.BOARD_SIZE/2-3));
         snakeBody.add(new Point(Board.BOARD_SIZE/2,Board.BOARD_SIZE/2-4));
+        snakeBody.add(new Point(Board.BOARD_SIZE/2,Board.BOARD_SIZE/2-5));
+        setSnakeBodyLength(5);
         direction = DirectionEnum.DOWN;
         nextDirection = DirectionEnum.DOWN;
     }
-
-    public void setDirection(DirectionEnum dir) {
-        direction = dir;
+    public void addBodyPart(){
+        snakeBody.add(new Point(snakeBody.get(snakeBodyLength-1).getX(), snakeBody.get(snakeBodyLength-1).getY()));
     }
+
+    public void setDirection(DirectionEnum direction) { this.direction = direction; }
 
     public DirectionEnum getDirection() {
         return direction;
@@ -88,5 +94,9 @@ public class Snake {
     public List<Point> getSnakeBody() {
         return snakeBody;
     }
+
+    public int getSnakeBodyLength() { return snakeBodyLength; }
+
+    public void setSnakeBodyLength(int snakeBodyLength) { this.snakeBodyLength = snakeBodyLength; }
 
 }

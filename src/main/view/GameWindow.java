@@ -1,5 +1,6 @@
 package main.view;
 
+import main.model.GameData;
 import main.model.ObjectsContainer;
 
 import javax.swing.*;
@@ -23,8 +24,10 @@ public class GameWindow extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    public void update(ObjectsContainer model) {
-        board.update(model);
+    public void update(GameData gameData) {
+        board.update(gameData.getObjects());
+        getGameInfo().getScoreLabel().setText("Score: " + gameData.getScore());
+        getGameInfo().getTimeLabel().setText("Time: " + gameData.getPeriod());
     }
 
     public GameInfo getGameInfo() {

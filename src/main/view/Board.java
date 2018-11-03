@@ -29,9 +29,9 @@ public class Board extends JPanel {
         }
     public void update(ObjectsContainer model){
             clearBoard();
-            updateApples(model.getApples());
             updateSnake(model.getSnake().getSnakeHead());
             updateSnakeBody(model.getSnake().getSnakeBody());
+            updateApples(model.getApples());
 
            // revalidate();
            // repaint();

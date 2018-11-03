@@ -1,5 +1,7 @@
 package main.model.utils;
 
+import java.util.Objects;
+
 public class Point {
     private int x;
     private int y;
@@ -8,6 +10,23 @@ public class Point {
         x = 0;
         y = 0;
     }
+
+    //TODO use "equals" method to check collision and generate apples
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Point point = (Point) o;
+        return getX() == point.getX() &&
+                getY() == point.getY();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getX(), getY());
+    }
+
     public Point(int x, int y){
         this.x = x;
         this.y = y;

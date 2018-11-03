@@ -1,52 +1,52 @@
 package main.controller;
 
 import main.model.Apple;
+import main.model.GameData;
 import main.model.ObjectsContainer;
-import main.model.Snake;
 import main.view.GameWindow;
+import org.joda.time.DateTime;
 
 public class Timer extends Thread{
 
-    private ObjectsContainer objects;
+    private GameData gameData;
     private GameWindow window;
 
-    public Timer(ObjectsContainer objects, GameWindow window) {
-        this.objects = objects;
+    public Timer(GameData gameData, GameWindow window) {
+        this.gameData = gameData;
         this.window = window;
     }
 
     @Override
     public void run() {
         int appleTimer = 0;
+
         while(true) {
-            window.update(objects);
+            window.update(gameData);
             try {
                 sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            objects.increseScore(1);
-            window.getGameInfo().getScoreLabel().setText("Score: " + objects.getScore());
-            objects.getSnake().setDirection(objects.getSnake().getNextDirection());
-            if(objects.isCollision()) {
+            gameData.increseScore(1);
+            gameData.getObjects().getSnake().setDirection(gameData.getObjects().getSnake().getNextDirection());
+            if(gameData.getObjects().isCollision()) {
                 break;
             }
 
-            objects.getSnake().move();
-            if(objects.isCollisionWithSneak()){
+            gameData.getObjects().getSnake().move();
+            if(gameData.getObjects().isCollisionWithSneak()){
                 break;
             }
-            for (Apple a : objects.getApples()){
-                if(objects.isCollisionWithApple(a)){
-                    objects.getApples().remove(a);
-                    objects.getSnake().addBodyPart();
-                    objects.increseScore(150);
-                    window.getGameInfo().getScoreLabel().setText("Score: " + objects.getScore());
+            for (Apple a : gameData.getObjects().getApples()){
+                if(gameData.getObjects().isCollisionWithApple(a)){
+                    gameData.getObjects().getApples().remove(a);
+                    gameData.getObjects().getSnake().addBodyPart();
+                    gameData.increseScore(150);
                     break;
                 }
             }
-            if(appleTimer==16){
-                objects.appleGenerator();
+            if(appleTimer==2){
+                gameData.getObjects().appleGenerator();
                 appleTimer=-1;
             }
 

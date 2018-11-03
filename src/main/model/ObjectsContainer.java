@@ -14,12 +14,13 @@ import static main.view.Board.BOARD_SIZE;
 public class ObjectsContainer {
     private Snake snake;
     private List<Apple> apples;
-    private int score;
+    private Random rand;
+
 
     public ObjectsContainer(){
         snake = new Snake();
         apples = new ArrayList<>();
-        score=0;
+        rand = new Random();
     }
 
     public boolean isCollision() {
@@ -43,21 +44,31 @@ public class ObjectsContainer {
     }
 
     public void appleGenerator(){
-        Random rand = new Random();
-        int x = rand.nextInt(BOARD_SIZE-1);
-        int y = rand.nextInt(BOARD_SIZE-1);
-        for(Point p : snake.getSnakeBody()){
-            if(p.getX() != x && p.getY() != y){
-                apples.add(new Apple(new Point(x,y)));
-                break;
-            }
-            if(snake.getSnakeHead().getX() != x && snake.getSnakeHead().getY() != y){
-                apples.add(new Apple(new Point(x,y)));
-                break;
-            }
+        int x,y;
+        boolean isAppleAdded = false;
+        boolean isAppleOnSnake = false;
+        while(!isAppleAdded) {
             x = rand.nextInt(BOARD_SIZE-1);
             y = rand.nextInt(BOARD_SIZE-1);
+            for (Point p : snake.getSnakeBody()) {
+                if (p.getX() == x && p.getY() == y) {
+                    isAppleOnSnake = true;
+                    break;
+                }
+            }
+            if(!isAppleOnSnake){
+                apples.add(new Apple(new Point(x, y)));
+                isAppleAdded = true;
+            }
+            else if (snake.getSnakeHead().getX() != x && snake.getSnakeHead().getY() != y) {
+                apples.add(new Apple(new Point(x, y)));
+                isAppleAdded = true;
+                break;
+            }
+
+
         }
+
     }
 
     public boolean isCollisionWithApple(Apple a){
@@ -81,11 +92,5 @@ public class ObjectsContainer {
     }
     public List<Apple> getApples() {
         return apples;
-    }
-    public int getScore(){
-        return score;
-    }
-    public void increseScore(int value){
-        score+=value;
     }
 }

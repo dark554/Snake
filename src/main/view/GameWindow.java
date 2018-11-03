@@ -26,4 +26,8 @@ public class GameWindow extends JFrame {
     public void update(ObjectsContainer model) {
         board.update(model);
     }
+
+    public GameInfo getGameInfo() {
+        return gameInfo;
+    }
 }

@@ -25,6 +25,8 @@ public class Timer extends Thread{
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            objects.increseScore(1);
+            window.getGameInfo().getScoreLabel().setText("Score: " + objects.getScore());
             objects.getSnake().setDirection(objects.getSnake().getNextDirection());
             if(objects.isCollision()) {
                 break;
@@ -38,12 +40,14 @@ public class Timer extends Thread{
                 if(objects.isCollisionWithApple(a)){
                     objects.getApples().remove(a);
                     objects.getSnake().addBodyPart();
+                    objects.increseScore(150);
+                    window.getGameInfo().getScoreLabel().setText("Score: " + objects.getScore());
                     break;
                 }
             }
-            if(appleTimer==12){
+            if(appleTimer==16){
                 objects.appleGenerator();
-                appleTimer=0;
+                appleTimer=-1;
             }
 
             appleTimer++;

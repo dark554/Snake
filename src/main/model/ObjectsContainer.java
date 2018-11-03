@@ -14,10 +14,12 @@ import static main.view.Board.BOARD_SIZE;
 public class ObjectsContainer {
     private Snake snake;
     private List<Apple> apples;
+    private int score;
 
     public ObjectsContainer(){
         snake = new Snake();
         apples = new ArrayList<>();
+        score=0;
     }
 
     public boolean isCollision() {
@@ -53,8 +55,8 @@ public class ObjectsContainer {
                 apples.add(new Apple(new Point(x,y)));
                 break;
             }
-            x = rand.nextInt(BOARD_SIZE );
-            y = rand.nextInt(BOARD_SIZE );
+            x = rand.nextInt(BOARD_SIZE-1);
+            y = rand.nextInt(BOARD_SIZE-1);
         }
     }
 
@@ -75,10 +77,15 @@ public class ObjectsContainer {
     }
 
     public Snake getSnake() {
-
         return snake;
     }
     public List<Apple> getApples() {
         return apples;
+    }
+    public int getScore(){
+        return score;
+    }
+    public void increseScore(int value){
+        score+=value;
     }
 }

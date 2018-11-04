@@ -12,7 +12,7 @@ public class GameWindow extends JFrame {
 
     public GameWindow(){
         super("SnakeApp");
-        this.setSize(1100,900);
+        this.setSize(1300,900);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
         board = new Board();

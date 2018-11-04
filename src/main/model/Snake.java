@@ -57,7 +57,7 @@ public class Snake {
         snakeBody.get(0).setFromPoint(snakeHead);
     }
 
-    private void initializeStartingPositon(){
+    public void initializeStartingPositon(){
         snakeHead = new Point(Board.BOARD_SIZE/2,Board.BOARD_SIZE/2);
         snakeBody = new ArrayList<>();
         snakeBody.add(new Point(Board.BOARD_SIZE/2,Board.BOARD_SIZE/2-1));

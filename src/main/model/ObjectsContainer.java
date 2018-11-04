@@ -45,7 +45,7 @@ public class ObjectsContainer {
 
     public void appleGenerator(){
         int x,y;
-        Point apple = new Point(0,0);
+        Point apple = new Point();
         boolean isAppleAdded = false;
         while(!isAppleAdded) {
             x = rand.nextInt(BOARD_SIZE - 1);
@@ -56,13 +56,6 @@ public class ObjectsContainer {
                 isAppleAdded = true;
             }
         }
-    }
-
-    public boolean isCollisionWithApple(Apple a){
-            if(a.getPosition().equals(snake.getSnakeHead())){
-                return true;
-            }
-            return false;
     }
 
     private boolean isAppleOnApple(Point apple){
@@ -85,6 +78,12 @@ public class ObjectsContainer {
         return false;
     }
 
+    public boolean isCollisionWithApple(Apple a){
+        if(a.getPosition().equals(snake.getSnakeHead())){
+            return true;
+        }
+        return false;
+    }
     public boolean isCollisionWithSnake(){
         for(Point p : snake.getSnakeBody()){
             if(p.equals(snake.getSnakeHead())){

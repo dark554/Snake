@@ -6,6 +6,7 @@ import main.view.GameWindow;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
 
 //class updating model on event(e.g key pressed) and calling window.getPanel().draw(objects)
@@ -15,12 +16,22 @@ public class GameController implements KeyListener {
     private Timer t;
 
     public GameController() {
+        initializeStartingSetup();
+    }
+
+    private void initializeStartingSetup(){
         window = new GameWindow();
         window.addKeyListener(this);
         gameData = new GameData();
         t = new Timer(gameData, window);
         t.start();
+    }
 
+    private void RestartGame(){
+        gameData.setScore(0);
+        gameData.setTime();
+        gameData.getObjects().getSnake().initializeStartingPositon();
+        gameData.getObjects().getApples().clear();
     }
 
     @Override
@@ -49,6 +60,10 @@ public class GameController implements KeyListener {
             if(gameData.getObjects().getSnake().getDirection() != DirectionEnum.LEFT) {
                 gameData.getObjects().getSnake().setNextDirection(DirectionEnum.RIGHT);
             }
+        }
+        if(e.getKeyChar()=='r'){
+            RestartGame();
+            t.setRestart();
         }
     }
 

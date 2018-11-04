@@ -16,6 +16,8 @@ public class GameData {
     public int getScore(){
         return score;
     }
+    public void setScore(int score) {this.score=score;}
+    public void setTime(){ staringTime = DateTime.now();}
     public void increseScore(int value){
         score+=value;
     }

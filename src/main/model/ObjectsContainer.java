@@ -45,42 +45,47 @@ public class ObjectsContainer {
 
     public void appleGenerator(){
         int x,y;
+        Point apple = new Point(0,0);
         boolean isAppleAdded = false;
-        boolean isAppleOnSnake = false;
+        boolean isAppleOnObject;
         while(!isAppleAdded) {
-            x = rand.nextInt(BOARD_SIZE-1);
-            y = rand.nextInt(BOARD_SIZE-1);
-            for (Point p : snake.getSnakeBody()) {
-                if (p.getX() == x && p.getY() == y) {
-                    isAppleOnSnake = true;
+            x = rand.nextInt(BOARD_SIZE - 1);
+            y = rand.nextInt(BOARD_SIZE - 1);
+            apple.setPoint(x,y);
+            isAppleOnObject=false;
+            for (Apple a : apples){
+                if(a.getPosition().equals(apple)){
+                    isAppleOnObject = true;
                     break;
                 }
             }
-            if(!isAppleOnSnake){
-                apples.add(new Apple(new Point(x, y)));
+            for (Point p : snake.getSnakeBody()) {
+                if (p.equals(apple)) {
+                    isAppleOnObject = true;
+                    break;
+                }
+            }
+            if (snake.getSnakeHead().equals(apple)) {
+                isAppleOnObject = true;
+            } else if (!isAppleOnObject) {
+                apples.add(new Apple(apple));
                 isAppleAdded = true;
             }
-            else if (snake.getSnakeHead().getX() != x && snake.getSnakeHead().getY() != y) {
-                apples.add(new Apple(new Point(x, y)));
-                isAppleAdded = true;
-                break;
-            }
-
-
+            System.out.println(apple.getX() + " " + apple.getY());
         }
-
     }
 
     public boolean isCollisionWithApple(Apple a){
-            if(a.getPosition().getY() == snake.getSnakeHead().getY() && a.getPosition().getX() == snake.getSnakeHead().getX()){
+            if(a.getPosition().equals(snake.getSnakeHead())){
                 return true;
             }
             return false;
     }
 
-    public boolean isCollisionWithSneak(){
+    public boolean isCollisionWithSnake(){
         for(Point p : snake.getSnakeBody()){
-            if(p.getY() == snake.getSnakeHead().getY() && p.getX() == snake.getSnakeHead().getX()){
+            if(p.equals(snake.getSnakeHead())){
+                System.out.println(p.getX() + " " +p.getY() );
                 return true;
             }
         }

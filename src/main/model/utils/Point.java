@@ -11,8 +11,6 @@ public class Point {
         y = 0;
     }
 
-    //TODO use "equals" method to check collision and generate apples
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -34,6 +32,10 @@ public class Point {
     public void setFromPoint(Point p){
         x = p.getX();
         y = p.getY();
+    }
+    public void setPoint(int x, int y){
+        this.x=x;
+        this.y=y;
     }
 
     public int getX() {

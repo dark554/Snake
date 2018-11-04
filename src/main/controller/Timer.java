@@ -34,7 +34,7 @@ public class Timer extends Thread{
             }
 
             gameData.getObjects().getSnake().move();
-            if(gameData.getObjects().isCollisionWithSneak()){
+            if(gameData.getObjects().isCollisionWithSnake()){
                 break;
             }
             for (Apple a : gameData.getObjects().getApples()){

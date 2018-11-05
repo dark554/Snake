@@ -49,7 +49,7 @@ public class Timer extends Thread{
                         break;
                     }
                 }
-                if(appleTimer==2){
+                if(appleTimer==16){
                     gameData.getObjects().appleGenerator();
                     appleTimer=-1;
                 }
